@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->index();
             $table->foreignId('plan_id');
-            $table->foreignId('payment_id')->index();
             $table->string('status', length:50);
             $table->string('type', length:50);
             $table->date('start');

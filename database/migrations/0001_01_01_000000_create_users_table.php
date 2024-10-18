@@ -19,13 +19,14 @@ return new class extends Migration
             $table->date('birthday')->nullable();
             $table->boolean('active');
             $table->string('phone_number', length: 20)->nullable();
-            $table->foreignId('role_id'); 
-            $table->foreignId('payment_method_id')->nullable();
+            $table->integer('role_code');
+            $table->foreign('role_code')->references('code')->on('roles'); 
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();
+
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {

@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('description');
             $table->double('price', 10,2);
             $table->string('billing_cicly', length:50);
+            $table->foreignId('user_id');
             $table->timestamps();
         });
     }

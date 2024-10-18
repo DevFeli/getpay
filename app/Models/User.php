@@ -22,6 +22,11 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'cpf',
+        'birthday',
+        'active',
+        'phone_number',
+        'role_code',
     ];
 
     /**
@@ -45,5 +50,41 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function address(){
+        return $this->hasOne(Address::class);
+    }
+
+    public function role(){
+        return $this->hasOne(Role::class);
+    }
+
+    public function subscriptions()
+    {
+        return $this->hasMany(Subscription::class);
+    }
+
+    public function getSubscriptionById($id)
+    {
+        return $this->subscriptions()->where('id', $id)->first();
+    }
+
+    public function wallets()
+    {
+        return $this->belongsToMany(Wallet::class, 'user_wallet', 'user_id', 'wallet_id');
+    }
+
+    public function getWalletById($id)
+    {
+        return $this->wallets()->where('wallet_id', $id)->first();
+    }
+
+    public function events(){
+        return $this->hasMany(Event::class);
+    }
+
+    public function plans(){
+        return $this->hasMany(Plan::class);
     }
 }

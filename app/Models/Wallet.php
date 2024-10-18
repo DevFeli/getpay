@@ -5,17 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Event extends Model
+class Wallet extends Model
 {
 
     use HasFactory;
 
     protected $fillable = [
         'user_id',
-        'start',
-        'end',
-        'title',
         'description',
-        'color',
     ];
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class, 'user_wallet', 'wallet_id', 'user_id');
+    }
 }
